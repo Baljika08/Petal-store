@@ -9,7 +9,7 @@
 
 | Файл | Үүрэг |
 |---|---|
-| `index.html` | Сайт бүхэлдээ (HTML, CSS, JavaScript, зургууд нэг файлд) |
+| `index-1.html` | Сайт бүхэлдээ (HTML, CSS, JavaScript, зургууд нэг файлд) |
 | `_headers` | Cloudflare Pages-ийн аюулгүй байдал, кэшийн тохиргоо |
 | `README.md` | Энэ тайлбар |
 
