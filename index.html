@@ -319,6 +319,9 @@ main#look{grid-template-areas:"a" "p" "b"}
 .gs3 .gsh{position:absolute;z-index:0;bottom:3%;left:50%;width:70%;height:5%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(74,29,51,.22),transparent)}
 .gs3 .gmore{position:absolute;z-index:6;right:4%;top:4%;padding:4px 10px;border-radius:999px;background:var(--rose);color:#fff;font-weight:700;font-size:13px}
 .gs3 .hr{z-index:7}
+.co.ok{text-align:center;padding:6px 0}.co.ok .ck{width:64px;height:64px;margin:6px auto 10px;border-radius:50%;display:grid;place-items:center;background:var(--rose);color:#fff;font-size:30px}.co.ok h2{margin-bottom:6px}.co.ok p{margin:6px 0}.co2{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}.co2 .row{margin-top:8px}.igb{display:grid;place-items:center;min-height:40px;border-radius:20px;padding:9px 14px;border:1px solid var(--rose);color:var(--rose2);text-decoration:none;font-weight:600}
+.plg label{display:flex;flex-direction:column;align-items:stretch;gap:4px;margin-top:12px;font-size:13px;color:var(--mut)}
+.plg input{width:100%;padding:12px 14px;font-size:16px}.plg .err{color:var(--red);font-size:13px;min-height:1.2em;margin:6px 0 0}
 
 /* ── Засах горим: зөвхөн хуудсыг засах эрхтэй хүнд харагдана ── */
 .ed{position:fixed;left:0;right:0;bottom:0;z-index:60;pointer-events:none;transition:transform .3s ease;
@@ -498,6 +501,7 @@ const DEPTS=['Makeup, skincare','Гар урлал','Гоёл чимэглэл',
 const DEPT0={PR015:'Гар урлал',PR027:'Гар урлал',PR022:'Гоёл чимэглэл',PR023:'Хичээлийн хэрэгсэл',PR024:'Хичээлийн хэрэгсэл'};
 const DEPTC={'Бичгийн хэрэгсэл':'Хичээлийн хэрэгсэл','Үсний хэрэгсэл':'Гоёл чимэглэл','Сам, толь':'Makeup, skincare','Бусад':'Гоёл чимэглэл'};
 const gbInfo=id=>{const o=PD.gb&&PD.gb[id];return o&&typeof o==='object'?{p:+o.p>0?Math.round(+o.p):0,s:typeof o.s==='string'?o.s.slice(0,40):''}:{p:0,s:''}};
+let SRV=false;   /* Cloudflare дээрх захиалгын сан (эзний горим) */
 (()=>{const I=document.getElementById('intro');if(!I)return;
 const lg=document.querySelector('.brand img');if(lg)document.getElementById('ilogo').src=lg.src;
 document.documentElement.style.overflow='hidden';let done=false;
@@ -799,7 +803,8 @@ async function coDone(btn){if(btn){btn.disabled=true;btn.textContent='Илгээ
  const ok=await saveOrder(o);
  if(ok){M(`<div class="co ok"><div class="ck">✓</div><h2>Баярлалаа, ${esc(co.name)}!</h2><p>Захиалгын код: <b>${esc(co.code)}</b></p><small>Захиалга тань бидэнд ирлээ. Төлбөр баталгаажмагц ${esc(co.phone)} дугаарт холбогдоно.</small></div>`);co.code='';cart=[];ls.s('pc',cart);render()}
  else{const txt='Захиалга '+o.code+'\nНэр: '+o.name+'\nУтас: '+o.phone+'\n'+o.items.join('\n')+'\nНийт: '+fm(o.total);
-  M(`<div class="co"><h2>Захиалгаа илгээнэ үү</h2><small>Захиалгыг автоматаар илгээж чадсангүй. Доорх текстийг хуулаад Instagram-аар бидэнд бичээрэй.</small><div class="acc"><div><span><strong style="white-space:pre-line;font-size:14px">${esc(txt)}</strong></span></div></div><div class="row"><button data-cp="${esc(txt)}">Хуулах</button><a class="pri" href="https://instagram.com/petal_store_mongolia" target="_blank" rel="noopener" style="display:grid;place-items:center;border-radius:20px;padding:9px 14px;background:var(--rose);color:#fff;text-decoration:none;font-weight:600">Instagram нээх ↗</a></div></div>`)}}
+   M(`<div class="co ok"><div class="ck">✓</div><h2>Баярлалаа, ${esc(o.name)}!</h2><p>Захиалгын код: <b>${esc(o.code)}</b></p><small>Төлбөр тань орж ирмэгц бид ${esc(o.phone)} дугаарт холбогдож баталгаажуулна. Гүйлгээний утга дээр энэ кодоо бичсэн эсэхээ шалгаарай.</small><div class="co2"><small>Хүсвэл захиалгаа Instagram-аар давхар илгээж болно.</small><div class="row"><button data-cp="${esc(txt)}">Захиалгаа хуулах</button><a class="igb" href="https://instagram.com/petal_store_mongolia" target="_blank" rel="noopener">Instagram нээх ↗</a></div></div></div>`);
+   co.code='';cart=[];ls.s('pc',cart);render()}}
 const cpy=(v,el)=>{const ok=()=>{el.textContent='Хуулагдлаа ✓';setTimeout(()=>el.textContent='Хуулах',1200)};const fb=()=>{const ta=document.createElement('textarea');ta.value=v;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();let c=false;try{c=document.execCommand('copy')}catch(x){}ta.remove();if(c)ok();else{el.textContent='Гараар хуулна уу';setTimeout(()=>el.textContent='Хуулах',1800)}};try{navigator.clipboard.writeText(v).then(ok,fb)}catch(e){fb()}};
 $('mbody').addEventListener('click',e=>{const t=e.target;
  if(t.closest('[data-pay]')){if(!cart.length)return;coForm();return}
@@ -819,13 +824,13 @@ let DB=null,UID=null,OWN=false,ORD=[],_ou=null;
  if(u){try{UID=await u.id()}catch(e){}try{OWN=(await u.isOwner())||(await u.canEdit())}catch(e){}}
  if(OWN)document.documentElement.classList.add('admin');if(DB&&OWN){$('ordb').hidden=false;_ou=DB.collection('orders').onSnapshot(sn=>{ORD=[];sn.docs.forEach(x=>{const v=x.data()||{};(Array.isArray(v.list)?v.list:[]).forEach((o,i)=>ORD.push({...o,_d:x.id,_i:i}))});ORD.sort((a,b)=>(b.t||0)-(a.t||0));$('oc').textContent=ORD.filter(o=>!o.paid).length;ordList();const r=$('oqR');if(r&&!r.contains(document.activeElement))renderOq()},()=>{})}
 }catch(e){}})();
-async function saveOrder(o){if(!DB||!UID)return false;try{const ref=DB.doc('orders/'+UID),sn=await ref.get(),cur=sn.exists&&Array.isArray((sn.data()||{}).list)?[...sn.data().list]:[];
+async function saveOrder(o){if(!DB||!UID)return srvSave(o);try{const ref=DB.doc('orders/'+UID),sn=await ref.get(),cur=sn.exists&&Array.isArray((sn.data()||{}).list)?[...sn.data().list]:[];
  cur.push(o);await ref.set({list:cur.slice(-50),t:Date.now()});return true}catch(e){return false}}
 /* ===== Захиалгын жагсаалт (зөвхөн эзэн, засварлагч) ===== */
 let oqText='',oqRes=[],oqMsg='',oqSearch='';
 const ofmt=t=>new Date(t).toLocaleString('mn-MN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
 const findOrd=(code,ph)=>ORD.find(o=>o.code===code&&(!ph||!o.phone||o.phone===ph));
-function ordModal(){
+function ordModal0(){
  M(`<div class="op"><h2>Захиалгууд</h2>
  <div class="oq"><label for="oqI">Банкны гүйлгээний утга эсвэл захиалгын код</label>
  <textarea id="oqI" rows="2" placeholder="ж: PT… 99112233  (олон гүйлгээг мөр мөрөөр нь зэрэг хуулж болно)">${esc(oqText)}</textarea>
@@ -833,7 +838,7 @@ function ordModal(){
  <p id="omsg" role="status"></p><div id="oqR" class="od" aria-live="polite"></div></div>
  <div class="ol"><input type="search" id="osq" placeholder="Хайх: код, утас, нэр, бараа" value="${esc(oqSearch)}" aria-label="Захиалга хайх">
  <p id="osum"></p><div class="od" id="odl"></div>
- <div class="row"><button id="oex">Хүснэгт болгон хуулах</button></div></div></div>`);
+ <div class="row"><button id="oex">Хүснэгт болгон хуулах</button>${SRV?'<button id="plogout">Гарах</button>':''}</div></div></div>`);
  renderOq();ordList()}
 function oflash(t,bad){const m=$('omsg');if(m){m.textContent=t||'';m.classList.toggle('bad',!!bad)}}
 function renderOq(){const el=$('oqR');if(!el)return;
@@ -855,9 +860,9 @@ function ordList(){const el=$('odl');if(!el)return;const q=oqSearch.trim().toLow
  :`<p>${ORD.length?'Хайлтад тохирох захиалга алга.':'Одоогоор захиалга алга. Банкны гүйлгээний утгыг дээрх нүдэнд хуулж оруулна уу.'}</p>`}
 const otsv=()=>['Огноо\tКод\tНэр\tУтас\tБараа\tДүн\tТөлбөр',...ORD.map(o=>[o.t?ofmt(o.t):'',o.code||'',o.name||'',o.phone||'',(o.items||[]).join('; '),o.total||0,o.paid?'орсон':'хүлээгдэж байна'].map(x=>String(x).replace(/[\t\r\n]+/g,' ')).join('\t'))].join('\n');
 /* захиалгын жагсаалтын баримтыг өөрчилнө: тухайн захиалгыг код, цагаар нь олно */
-async function ordEdit(o,fn){const ref=DB.doc('orders/'+o._d),sn=await ref.get(),d=sn.data()||{},l=Array.isArray(d.list)?d.list.map(x=>({...x})):[];
+async function ordEdit(o,fn){if(SRV)return srvEdit(o,fn);const ref=DB.doc('orders/'+o._d),sn=await ref.get(),d=sn.data()||{},l=Array.isArray(d.list)?d.list.map(x=>({...x})):[];
  const j=l.findIndex(x=>x&&x.code===o.code&&x.t===o.t);if(j<0)return;fn(l,j);await ref.set({...d,list:l,t:Date.now()})}
-async function addOrders(idx){if(!DB)return;
+async function addOrders(idx){if(SRV)return srvAdd(idx);if(!DB)return;
  const list=idx==='all'?oqRes.map((r,i)=>i).filter(i=>!findOrd(oqRes[i].code,oqRes[i].phone)):[+idx];if(!list.length)return;
  const d=new Date(),id='m-'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
  try{const ref=DB.doc('orders/'+id),sn=await ref.get(),cur=sn.exists&&Array.isArray((sn.data()||{}).list)?[...sn.data().list]:[];
@@ -882,9 +887,9 @@ $('mbody').addEventListener('click',async e=>{const t=e.target;
  if(t.id==='oex'){const x=otsv();M(`<div class="oex"><h2>Захиалгын хүснэгт</h2><small>Хуулаад Excel эсвэл Google Sheets-д буулгана. Багана бүр тусдаа нүдэнд орно.</small><textarea readonly aria-label="Хүснэгт">${esc(x)}</textarea><div class="row"><button class="pri" data-cp="${esc(x)}">Хуулах</button><button data-oback="1">← Захиалгууд</button></div></div>`);return}
  if(t.closest('[data-oback]')){ordModal();return}
  const ad=t.closest('[data-oadd]');if(ad){ad.disabled=true;await addOrders(ad.dataset.oadd);ad.disabled=false;return}
- const pk=t.closest('[data-opk]');if(pk&&DB){const o=ORD[+pk.dataset.opk];if(!o)return;pk.disabled=true;try{await ordEdit(o,(l,j)=>{l[j].paid=true})}catch(x){pk.disabled=false}return}
- const b=t.closest('[data-op]');if(b&&DB){const o=ORD[+b.dataset.op];if(!o)return;b.disabled=true;try{await ordEdit(o,(l,j)=>{l[j].paid=!l[j].paid})}catch(x){b.disabled=false}return}
- const dl=t.closest('[data-odel]');if(dl&&DB){
+ const pk=t.closest('[data-opk]');if(pk&&(DB||SRV)){const o=ORD[+pk.dataset.opk];if(!o)return;pk.disabled=true;try{await ordEdit(o,(l,j)=>{l[j].paid=true})}catch(x){pk.disabled=false}return}
+ const b=t.closest('[data-op]');if(b&&(DB||SRV)){const o=ORD[+b.dataset.op];if(!o)return;b.disabled=true;try{await ordEdit(o,(l,j)=>{l[j].paid=!l[j].paid})}catch(x){b.disabled=false}return}
+ const dl=t.closest('[data-odel]');if(dl&&(DB||SRV)){
   if(!dl.dataset.arm){dl.dataset.arm='1';dl.textContent='Устгах уу? Дахин дар';dl.classList.add('danger');return}
   const o=ORD[+dl.dataset.odel];if(!o)return;dl.disabled=true;try{await ordEdit(o,(l,j)=>{l.splice(j,1)})}catch(x){dl.disabled=false}}});
 /* ===== Доод нийт дүн ===== */
@@ -939,6 +944,35 @@ function pickV(key,id){const g=D.CG.find(x=>x.key===key);if(!g)return;const had=
  else if(st.sel.length>=MAX){msg('Хамгийн ихдээ '+MAX+' оосор сонгоно. Нэгийг нь хасна уу.');return}
  else st.sel=[...st.sel,id];
  msg('');render()}
+
+/* ===== Cloudflare дээрх захиалгын сан ===== */
+const PK=()=>{try{return localStorage.getItem('pkey')||''}catch(e){return''}};
+async function srvCall(m,p,b){const r=await fetch('/api/'+p,{method:m,headers:{'content-type':'application/json',authorization:'Bearer '+PK()},body:b?JSON.stringify(b):undefined});
+ let j={};try{j=await r.json()}catch(e){}
+ if(r.status===401){try{localStorage.removeItem('pkey')}catch(e){}throw{code:'unauthorized'}}
+ if(!r.ok)throw{code:j.error||('http_'+r.status)};return j}
+const srvErr=e=>e&&e.code==='unauthorized'?'Нууц үг буруу байна.':e&&e.code==='no_admin_key'?'Cloudflare дээр ADMIN_KEY нууц үгээ хадгалаагүй байна.':e&&e.code==='no_db'?'Захиалгын сан холбогдоогүй байна.':'Холбогдож чадсангүй. Интернэтээ шалгаад дахин оролдоно уу.';
+async function srvSave(o){if(window.claude||!/^https?:$/.test(location.protocol))return false;
+ try{const r=await fetch('/api/orders',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code:o.code,name:o.name,phone:o.phone,items:o.items,total:o.total})});return r.ok}catch(e){return false}}
+async function srvLoad(quiet){try{const d=await srvCall('GET','orders');ORD=(d.orders||[]).map(o=>({...o,_id:o.id}));
+  $('oc').textContent=ORD.filter(o=>!o.paid).length;ordList();const r=$('oqR');if(r&&!r.contains(document.activeElement))renderOq()}
+ catch(e){if(quiet)return;if(e.code==='unauthorized'||e.code==='no_admin_key')loginModal(srvErr(e));else oflash(srvErr(e),1)}}
+async function srvEdit(o,fn){const l=[{...o}];fn(l,0);
+ if(!l.length)await srvCall('DELETE','orders/'+o.id);else await srvCall('PATCH','orders/'+o.id,{paid:!!l[0].paid});await srvLoad()}
+async function srvAdd(idx){const list=idx==='all'?oqRes.map((r,i)=>i).filter(i=>!findOrd(oqRes[i].code,oqRes[i].phone)):[+idx];if(!list.length)return;
+ const orders=list.map(i=>{const r=oqRes[i],L=ordLines(r.keys);return{code:r.code,name:String(r.name||'').trim().slice(0,80),phone:String(r.phone||'').replace(/\D/g,'').slice(0,8),total:L.total,items:L.items,paid:r.paid!==false}});
+ try{await srvCall('POST','orders/manual',{orders});oqRes=oqRes.filter((r,i)=>!list.includes(i));if(!oqRes.length){oqText='';const ta=$('oqI');if(ta)ta.value=''}
+  await srvLoad();renderOq();oflash(list.length+' захиалга жагсаалтад нэмэгдлээ ✓')}catch(e){oflash(srvErr(e),1)}}
+function loginModal(err){M(`<div class="plg"><h2>Захиалгууд</h2><small>Захиалгын жагсаалт руу орох нууц үгээ оруулна уу.</small>
+ <label>Нууц үг<input class="ei" id="pkey" type="password" autocomplete="current-password"></label>
+ <p class="err" id="perr" role="alert">${esc(err||'')}</p><div class="row"><button class="pri" id="plog">Нэвтрэх</button></div></div>`);
+ setTimeout(()=>{const i=$('pkey');if(i)i.focus()},50)}
+function ordModal(){if(SRV&&!PK()){loginModal();return}ordModal0();if(SRV)srvLoad()}
+$('mbody').addEventListener('click',e=>{const t=e.target;
+ if(t.id==='plog'){const v=($('pkey')||{}).value||'';if(!v.trim())return;try{localStorage.setItem('pkey',v.trim())}catch(x){}ordModal();return}
+ if(t.id==='plogout'){try{localStorage.removeItem('pkey')}catch(x){}ORD=[];$('oc').textContent='0';$('modal').classList.remove('o')}});
+$('mbody').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='pkey'){e.preventDefault();const b=$('plog');if(b)b.click()}});
+if(!window.claude&&/^https?:$/.test(location.protocol)&&document.documentElement.classList.contains('admin')){SRV=true;$('ordb').hidden=false;if(PK())srvLoad(1)}
 /* ===== Нүүр: унжлага оосор савлана, лого дээр дарахад Нүүр рүү ===== */
 (()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
  if(!reduce)document.querySelectorAll('.h-hang').forEach(h=>{let busy=false;
@@ -961,7 +995,7 @@ const root=PETAL_ROOT;
 const SKEL='<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>';
 const FILE_A='<!doctype html>\n<html lang="mn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c01f6a">';
 const FILE_B='<!'+'-- Font: Lora (SIL OFL 1.1, Cyreal), subsetted. --'+'><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>';
-const TITLE='PETAL store',FILE_NAME='petal_store.html',DRAFT='petal-store-draft-v1';
+const TITLE='PETAL store',FILE_NAME='index.html',DRAFT='petal-store-draft-v1';
 const LT='<',SC=LT+'script id="petal-app">',SCX=LT+'/script>';
 let pristine=PRISTINE0,baseCache=null,ro=null;
 const S={on:false,dirty:false,busy:false,view:'edit',mode:'',art:null,dl:null,opened:[],timer:0};

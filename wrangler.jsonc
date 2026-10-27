@@ -1,0 +1,14 @@
+{
+  // PETAL store: сайт (index.html) + захиалгын сан
+  "name": "petal-store",
+  "main": "worker.js",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  // Анх нийтлэхэд Cloudflare өгөгдлийн санг өөрөө үүсгэнэ (ID бичих шаардлагагүй)
+  "d1_databases": [
+    { "binding": "DB", "database_name": "petal-orders" }
+  ]
+}
