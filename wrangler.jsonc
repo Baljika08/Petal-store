@@ -10,5 +10,7 @@
   // Анх нийтлэхэд Cloudflare өгөгдлийн санг өөрөө үүсгэнэ (ID бичих шаардлагагүй)
   "d1_databases": [
     { "binding": "DB", "database_name": "petal-orders" }
-  ]
+  ],
+  // Туслах (чатбот): Cloudflare Workers AI, үнэгүй багцад өдөрт 10,000 Neuron
+  "ai": { "binding": "AI" }
 }

@@ -371,6 +371,201 @@ main#look{grid-template-areas:"a" "p" "b"}
 .ptoast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.ptoast{transition:none}}
 
+/* ===== stage 5: цэгцтэй апп маягийн байршил ===== */
+#sbar{display:none!important}
+header{position:sticky;top:0;z-index:7;padding:8px 14px}
+header .brand img{width:38px;height:38px}
+header .logo{font-size:21px}
+header .logo i{font-size:12.5px}
+header button{min-height:36px;padding:6px 12px;font-size:14px}
+.tbar{display:none}
+@media(max-width:819px){
+ .nav{display:none}
+ #cartb{display:none}
+ body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+ .tbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:8;background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+  padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 20px rgba(192,31,106,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+ .ed{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+ body[data-editing] .ed{bottom:0}
+ body[data-editing] .tbar{display:none}
+ body:not([data-editing]):has(#sbar:not(.hide)) .ed{transform:none}
+ #home,#shop,#giftv,main#look{margin-top:10px}
+}
+.tbar button{flex:1 1 0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;padding:4px 2px;
+ border:0;border-radius:14px;background:transparent;color:var(--mut);font:600 11px/1.1 var(--sans)}
+.tbar svg{width:24px;height:24px}
+.tbar button.on{color:var(--rose)}
+.tbar button.on svg{fill:var(--sel)}
+.tbar b{position:absolute;top:3px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--rose);color:#fff;font:700 11px/18px var(--sans);text-align:center;border:2px solid #fff;box-sizing:content-box}
+.tbar b.bump{animation:tbump .4s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tbump{0%{transform:scale(.6)}100%{transform:scale(1)}}
+
+/* ── Бүх бараа ── */
+#shop>.row:first-child h1{font-size:24px!important}
+#psq{padding-left:40px;background:var(--tile) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23936479' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='m20 20-4.2-4.2'/%3E%3C/svg%3E") 12px center/18px no-repeat}
+#pcount{display:block;margin:2px 0 0;font-size:12.5px;color:var(--mut)}
+.padm{margin:8px 0 10px}
+.pg{gap:10px;margin-top:8px}
+@media(min-width:600px){.pg{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.pg{grid-template-columns:repeat(4,1fr);gap:14px}}
+#shop .pc,.pc{padding:0;gap:0;border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px rgba(192,31,106,.06);cursor:pointer;transition:box-shadow .2s,transform .2s}
+.pc:hover{box-shadow:0 8px 22px rgba(192,31,106,.14)}
+.pc .im{border-radius:0;aspect-ratio:4/5;background:#f7f1f3}
+.pc .hf{top:7px;right:7px;width:32px;height:32px;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.pc .pe1{left:7px;top:7px;width:32px;height:32px;padding:0;font-size:15px;border-radius:50%;display:grid;place-items:center}
+.pc .qa{position:absolute;right:8px;bottom:8px;width:38px;height:38px;min-height:0;padding:0;border-radius:50%;border:0;background:var(--rose);color:#fff;font:500 24px/38px var(--sans);
+ box-shadow:0 4px 12px rgba(192,31,106,.35);transition:transform .15s}
+.pc .qa:active{transform:scale(.9)}
+.pc .qa.ok{background:#2e7d32;font-size:18px}
+.pc .pb{padding:8px 10px 10px;display:flex;flex-direction:column;gap:2px;flex:1 1 auto}
+.pc h3{font:600 13.5px/1.3 var(--sans);margin:0;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc .pmeta{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto;padding-top:3px;min-height:16px}
+.pc .pr{font:700 15px/1.3 var(--sans);color:var(--rose2)}
+.pc .dots{display:flex;gap:4px;align-items:center}
+.pc .dots i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.pc .dots i.on{box-shadow:0 0 0 1.5px #fff,0 0 0 3px var(--rose)}
+.pc .dots em{font:600 11px var(--sans);color:var(--mut);font-style:normal;margin-left:2px}
+.pc small.pcode{font-size:10.5px;color:#b392a2;letter-spacing:.02em;margin-left:auto}
+.pc .pb .ei{margin-top:4px}
+.pc .pb .sw{margin-top:4px}
+.pc .pb .sw button{width:22px;height:22px}
+
+/* ── Цонх: гар утсан дээр доороос гарна ── */
+.modal .box{position:relative;display:flex;flex-direction:column}
+.modal .box>.row:last-child{order:-1;position:sticky;top:-16px;z-index:3;margin:-16px -16px -28px auto;padding:12px 12px 0 0;justify-content:flex-end;pointer-events:none}
+#mclose{pointer-events:auto;width:36px;height:36px;min-height:0;padding:0;border-radius:50%;font-size:0;background:rgba(255,255,255,.92);border:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.08);color:var(--ink)}
+#mclose::before{content:"✕";font-size:15px;line-height:1}
+#mbody h2:first-child,#mbody>div>h2:first-child{padding-right:44px}
+@media(max-width:699px){
+ .modal{place-items:end center;padding:0}
+ .modal .box{max-width:none;border-radius:22px 22px 0 0;max-height:92vh;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));animation:sheetup .28s cubic-bezier(.2,.8,.3,1)}
+}
+@keyframes sheetup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.modal .box{animation:none}.pc,.pc .qa{transition:none}}
+
+/* ── Барааны дэлгэрэнгүй ── */
+.box:has(.ps){padding:0;overflow:auto}
+.box:has(.ps)>.row:last-child{margin:0 0 -48px auto;padding:12px 12px 0 0;top:0}
+.ps .psi{aspect-ratio:1/1;background:#f7f1f3;border-radius:22px 22px 0 0;overflow:hidden}
+@media(min-width:700px){.ps .psi{border-radius:16px 16px 0 0}}
+.ps .psi img{width:100%;height:100%;object-fit:cover;display:block}
+.ps .psi.ch img{object-fit:contain;padding:8%}
+.ps .pst{display:flex;gap:8px;overflow-x:auto;padding:10px 16px 2px;scrollbar-width:none}
+.ps .pst::-webkit-scrollbar{display:none}
+.ps .pst button{flex:0 0 auto;width:54px;height:54px;padding:0;min-height:0;border-radius:12px;overflow:hidden;border:2px solid transparent;background:#f7f1f3}
+.ps .pst button.on{border-color:var(--rose)}
+.ps .pst img{width:100%;height:100%;object-fit:cover;display:block}
+.ps .psb{padding:12px 18px 18px}
+.ps h2{font:600 22px/1.2 var(--serif);margin:0 44px 4px 0}
+.ps .psp{font:700 20px var(--sans);color:var(--rose2)}
+.ps .psm{margin:6px 0 0;font-size:13px;color:var(--mut)}
+.psq{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:14px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#fff}
+.qty button{width:40px;height:40px;min-height:0;padding:0;border:0;border-radius:50%;background:transparent;font:500 20px/1 var(--sans);color:var(--rose2)}
+.qty output{min-width:28px;text-align:center;font:700 15px var(--sans)}
+.qty.sm button{width:32px;height:32px;font-size:16px}
+.qty.sm output{min-width:20px;font-size:14px}
+.psa{display:flex;gap:10px;margin-top:14px}
+button.big{flex:1 1 auto;min-height:50px;font-size:16px;border-radius:16px}
+.psf{width:50px;min-height:50px;padding:0;border-radius:16px;font-size:22px;color:var(--rose)}
+.psf.on{background:var(--sel);border-color:var(--rose)}
+button.lnk{background:none;border:0;color:var(--rose2);font-weight:600;padding:12px 4px 0;min-height:0;text-decoration:underline;text-underline-offset:3px}
+
+/* ── Сагс ── */
+.cs h2{display:flex;align-items:baseline;gap:8px;font:600 24px var(--serif);margin:0 44px 8px 0}
+.cs h2 small{font:500 14px var(--sans);color:var(--mut)}
+.cls{display:grid}
+.cl{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.cl:first-child{border-top:0}
+.cth{width:64px;height:64px;padding:0;min-height:0;border-radius:12px;overflow:hidden;background:#f7f1f3;border:1px solid var(--line);display:block}
+.cth img{width:100%;height:100%;object-fit:cover;display:block}
+.cl.look .cth img{object-fit:contain}
+.cm{min-width:0;display:flex;flex-direction:column;gap:1px}
+.cm b{font:600 14px/1.3 var(--sans);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cm small{font-size:12px;color:var(--mut)}
+.cm .cu{font-size:13px;color:var(--ink)}
+.cq{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.cq .ct{font:700 14px var(--sans);color:var(--rose2);white-space:nowrap}
+.cx{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;font-size:14px}
+.cst{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:4px}
+.cst span{display:inline-flex;align-items:center;gap:4px;background:var(--tile);border:1px solid var(--line);border-radius:999px;padding:2px 8px 2px 2px;font-size:11.5px;max-width:100%}
+.cst img{width:22px;height:22px;border-radius:50%;object-fit:contain;background:#fff}
+.cst i{font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.csum{margin-top:6px;padding:12px 14px;border-radius:14px;background:var(--sel)}
+.csum .sr:first-child{margin-top:0}
+.csum .sr b{font-size:17px;color:var(--rose2)}
+.csum .sr.mu{font-size:13px;color:var(--mut)}
+.cmiss{margin:8px 0 0;font-size:12.5px;color:var(--mut)}
+.cfoot{position:sticky;bottom:-18px;background:var(--card);padding:12px 0 2px;margin-top:6px;display:flex;flex-direction:column;align-items:center}
+.cfoot .big{width:100%}
+.cempty{text-align:center;padding:18px 0 6px;color:var(--mut)}
+.cempty svg{width:56px;height:56px;color:var(--rose);opacity:.6}
+.cempty p{margin:8px 0 2px;font-weight:600;color:var(--ink)}
+.cempty .row{justify-content:center}
+
+/* ── «Сагсанд нэмэгдлээ» ── */
+.ctoast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:12;
+ display:flex;align-items:center;gap:10px;width:min(420px,calc(100% - 24px));padding:8px 8px 8px 8px;border-radius:16px;background:#4a1d33;color:#fff;box-shadow:0 12px 28px rgba(74,29,51,.35);transition:opacity .2s,transform .2s}
+.ctoast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.ctoast img{width:40px;height:40px;border-radius:10px;object-fit:cover;background:#fff}
+.ctoast span{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;font-size:14px}
+.ctoast small{font-size:12px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctoast button{flex:0 0 auto;min-height:36px;padding:6px 12px;border-radius:12px;border:0;background:#fff;color:var(--rose2);font-weight:700;font-size:13px}
+@media(min-width:820px){.ctoast{bottom:24px}}
+@media (prefers-reduced-motion:reduce){.ctoast{transition:none}}
+
+/* ── Туслах (AI) ── */
+.cfab{position:fixed;right:12px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;align-items:center;gap:5px;min-height:42px;padding:0 14px 0 10px;font-size:13px!important;
+ border:0;border-radius:999px;background:var(--rose);color:#fff;font:700 14px var(--sans);box-shadow:0 8px 22px rgba(192,31,106,.38)}
+.cfab svg{width:20px;height:20px}
+@media(min-width:820px){.cfab{bottom:22px;right:22px}}
+html.chopen .cfab,html:has(.modal.o) .cfab{display:none}
+body:not([data-editing]):has(.modal.o) .ed,html.chopen .ed{display:none}
+.chat{position:fixed;z-index:20;inset:0;display:flex;flex-direction:column;background:var(--card);color:var(--ink)}
+.chat[hidden]{display:none}
+@media(min-width:700px){.chat{inset:auto 22px 22px auto;width:390px;height:min(620px,calc(100vh - 44px));border-radius:22px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(74,29,51,.28);overflow:hidden}}
+.chh{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px 14px;background:var(--hdr);color:#fff}
+@media(min-width:700px){.chh{padding-top:12px}}
+.cha{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:20px}
+.chh div{flex:1 1 auto;display:flex;flex-direction:column;line-height:1.25}
+.chh b{font:600 17px var(--serif)}
+.chh small{font-size:12px;color:#fff;opacity:.88}
+.chx{width:38px;height:38px;min-height:0;padding:0;border-radius:50%;background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff}
+.chl{flex:1 1 auto;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:var(--tile)}
+.chm{max-width:86%;padding:9px 12px;border-radius:16px;font-size:14.5px;line-height:1.45}
+.chm p{margin:0}.chm p+p,.chm ul+p,.chm p+ul{margin-top:6px}
+.chm ul{margin:4px 0 0;padding-left:18px}
+.chm.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.chm.me{align-self:flex-end;background:var(--rose);color:#fff;border-bottom-right-radius:6px;white-space:pre-wrap}
+.chm.err{background:#fff6f6;border-color:#f3c4c4}
+.chp{display:inline;min-height:0;padding:0 2px;border:0;border-radius:4px;background:var(--sel);color:var(--rose2);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.chc{display:flex;gap:8px;overflow-x:auto;margin-top:8px;padding-bottom:2px;scrollbar-width:none}
+.chc button{flex:0 0 112px;display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:0 0 6px;min-height:0;border-radius:12px;overflow:hidden;background:#fff;text-align:left;font-size:12px}
+.chc img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f7f1f3}
+.chc span{padding:0 7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}
+.chc b{padding:0 7px;color:var(--rose2)}
+.typing{display:flex;gap:4px;padding:12px 14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--mut);opacity:.4;animation:tdot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{50%{opacity:1;transform:translateY(-2px)}}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none;opacity:.7}}
+.chs{display:flex;gap:6px;overflow-x:auto;padding:8px 12px 0;background:var(--tile);scrollbar-width:none}
+.chs[hidden]{display:none}
+.chs button{flex:0 0 auto;min-height:34px;padding:6px 12px;font-size:13px;background:#fff;color:var(--rose2);border-color:var(--rose)}
+.chf{display:flex;gap:8px;align-items:flex-end;padding:10px 12px;background:var(--tile);border-top:1px solid var(--line)}
+.chf textarea{flex:1 1 auto;resize:none;max-height:120px;padding:11px 14px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);font:inherit;font-size:16px;line-height:1.3}
+.chf button{width:46px;height:46px;min-height:0;padding:0;border-radius:50%;font-size:18px}
+.chn{display:block;padding:0 12px calc(8px + env(safe-area-inset-bottom,0px));background:var(--tile);font-size:11px;color:var(--mut);text-align:center}
+
+/* ── Google Sheets ── */
+.shm ol{margin:10px 0;padding-left:20px;font-size:14px}
+.shm ol li{margin:4px 0}
+.shm label{display:block;margin-top:12px;font-size:13px;color:var(--mut)}
+.shf{display:flex;gap:8px;align-items:center;margin-top:4px}
+.shf code{flex:1 1 auto;min-width:0;overflow-x:auto;white-space:nowrap;padding:9px 10px;border-radius:10px;background:var(--tile);border:1px solid var(--line);font-size:12px}
+.shf button{flex:0 0 auto;min-height:36px;padding:6px 12px}
+.shw{font-size:12.5px;color:var(--mut);margin:12px 0 0}
+
 /* ── Засах горим: зөвхөн хуудсыг засах эрхтэй хүнд харагдана ── */
 .ed{position:fixed;left:0;right:0;bottom:0;z-index:60;pointer-events:none;transition:transform .3s ease;
   padding:0 max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
@@ -473,8 +668,8 @@ body[data-editing] .lk.opt:has(> span > [data-t]:first-child:empty) [data-t]:emp
   <p class="h-sub" data-t="order.sub">Дөрвөн алхамд багтана.</p>
   <ol class="h-steps">
     <li class="h-step"><span class="h-n">1</span><h3 data-t="s1.h">Бараагаа сонго</h3><p data-t="s1.p">«Бүх бараа», «Look бүтээх» хэсгээс оосор, бараа, хайрцгаа сонгоод сагсандаа нэм.</p></li>
-    <li class="h-step"><span class="h-n">2</span><h3 data-t="s2.h">Нэр, утсаа бич</h3><p data-t="s2.p">Сагсан дээрх «Төлбөр төлөх» товчийг дараад нэр, утасны дугаараа оруул.</p></li>
-    <li class="h-step"><span class="h-n">3</span><h3 data-t="s3.h">Данс руу шилжүүл</h3><p><span data-t="s3.p">Гүйлгээний утга дээр захиалгын кодоо бич.</span> <span data-t="s3.cl">Код нь</span> <span class="h-ref" data-t="s3.ref">PT06C7E0P</span> <span data-t="s3.ct">шиг PT-ээр эхэлнэ. Сонгосон бараа тань кодонд бичигдсэн тул яг хуулж бичээрэй.</span></p></li>
+    <li class="h-step"><span class="h-n">2</span><h3 data-t="s2.h">Хаяг, утсаа бич</h3><p data-t="s2.p">Сагсан дээрх «Төлбөр төлөх»-ийг дараад нэр, утас, хүргэлтийн бүс, хаягаа бич. А, Б бүсэд хүргэлт 9,000₮.</p></li>
+    <li class="h-step"><span class="h-n">3</span><h3 data-t="s3.h">Данс руу шилжүүл</h3><p><span data-t="s3.p">Гүйлгээний утга дээр захиалгын дугаар, утасны дугаараа бич.</span> <span data-t="s3.cl">Дугаар нь</span> <span class="h-ref" data-t="s3.ref">PT1024</span> <span data-t="s3.ct">шиг PT-ээр эхэлнэ. «Хуулах» дарж яг хэвээр нь бичээрэй.</span></p></li>
     <li class="h-step"><span class="h-n">4</span><h3 data-t="s4.h">Бид холбогдоно</h3><p data-t="s4.p">Төлбөр баталгаажмагц бид таны оруулсан дугаарт холбогдоно.</p></li>
   </ol>
 </div>
@@ -483,11 +678,11 @@ body[data-editing] .lk.opt:has(> span > [data-t]:first-child:empty) [data-t]:emp
   <h2 data-t="faq.h">Түгээмэл асуулт</h2>
   <div class="h-faq">
     <details class="opt"><summary><span data-t="fq1.q">Цүнхийг нь зарж байгаа юу?</span></summary><p data-t="fq1.a">Үгүй. Look бүтээх хэсгийн цүнхнүүд нь оосор зүүж харахад зориулсан жишээ бөгөөд зарагдахгүй.</p></details>
-    <details class="opt"><summary><span data-t="fq2.q">Төлбөрөө яаж төлөх вэ?</span></summary><p data-t="fq2.a">Данс руу шилжүүлнэ. Сагсан дээрх «Төлбөр төлөх»-ийг дарж нэр, утсаа бичсэний дараа дансны мэдээлэл болон захиалгын код гарч ирнэ. Гүйлгээний утган дээр кодоо заавал хуулж бичээрэй: Таны сонгосон бараа кодонд бичигдсэн байгаа.</p></details>
+    <details class="opt"><summary><span data-t="fq2.q">Төлбөрөө яаж төлөх вэ?</span></summary><p data-t="fq2.a">Данс руу шилжүүлнэ. Сагсан дээрх «Төлбөр төлөх»-ийг дарж нэр, утас, хаягаа бичсэний дараа дансны мэдээлэл болон захиалгын дугаар гарч ирнэ. Гүйлгээний утга дээр дугаар, утсаа заавал бичээрэй.</p></details>
     <details class="opt"><summary><span data-t="fq3.q">Захиалгаа хэзээ баталгаажуулах вэ?</span></summary><p data-t="fq3.a">Төлбөр баталгаажмагц бид таны оруулсан утасны дугаарт холбогдоно.</p></details>
     <details class="opt"><summary><span data-t="fq4.q">Бэлгийн хайрцагт юу хийж болох вэ?</span></summary><p data-t="fq4.a">Оосор болон сагсандаа нэмсэн бусад бүх барааг хийж болно. Хайрцаг бүр өөр үнэтэй.</p></details>
     <details class="opt"><summary><span data-t="fq5.q">Нэг загварын өөр өнгө байдаг уу?</span></summary><p data-t="fq5.a">Байгаа. Ижил загварын өөр өнгөнүүдийг нэг бараан дотроос сонгож үзнэ.</p></details>
-    <details class="opt" hidden=""><summary><span data-t="fq6.q" data-ph="＋ Асуулт нэмэх" hidden=""></span></summary><p data-t="fq6.a" data-ph="Хариулт" hidden=""></p></details>
+    <details class="opt"><summary><span data-t="fq6.q" data-ph="＋ Асуулт нэмэх">Хүргэлт хэд вэ?</span></summary><p data-t="fq6.a" data-ph="Хариулт">Улаанбаатарын А, Б бүсэд 9,000₮. Бусад бүс, орон нутаг руу хүргэлтийн үнийг Instagram-аар чатаар тохирно.</p></details>
     <details class="opt" hidden=""><summary><span data-t="fq7.q" data-ph="＋ Асуулт нэмэх" hidden=""></span></summary><p data-t="fq7.a" data-ph="Хариулт" hidden=""></p></details>
     <details class="opt" hidden=""><summary><span data-t="fq8.q" data-ph="＋ Асуулт нэмэх" hidden=""></span></summary><p data-t="fq8.a" data-ph="Хариулт" hidden=""></p></details>
   </div>
@@ -644,15 +839,15 @@ const CI={all:'✨','Makeup, skincare':'💄','Гар урлал':'🧶','Гоё
 const BASECATS=DEPTS;
 const sws=x=>{const c=COL[String(x.color||'').replace(/ \d$/,'')];return c?'background:'+c:"background:#f3e6ec url('"+String(x.src).replace(/'/g,'%27')+"') center/cover"};
 function pmatch(p,q){const h=[p.name,p.id,p.sub,p.cat,...p.v.map(v=>(v.color||'')+' '+(v.id||''))].join(' ').toLowerCase();return q.split(/\s+/).filter(Boolean).every(w=>h.includes(w))}
+function pdots(p,i){if(p.v.length<2)return '';const n=p.v.length,sh=p.v.slice(0,5);
+ return `<div class="dots" aria-label="${n} өнгө">${sh.map((x,j)=>`<i class="${j===i?'on':''}" style="${esc(sws(x))}"></i>`).join('')}${n>5?`<em>+${n-5}</em>`:''}</div>`}
 function pcard(p){const i=Math.min(pv[p.id]||0,p.v.length-1),v=p.v[i]||p.v[0]||{src:'',color:''},nm=esc(p.name);
- return `<article class="pc" data-pid="${esc(p.id)}"><div class="im${p.ch?' ch':''}"><img loading="lazy" src="${esc(v.src)}" alt="${nm} ${esc(v.color||'')}"><button class="hf" data-f="${esc(p.id)}" aria-label="Дуртай">${favs.includes(p.id)?'♥':'♡'}</button>${SRV?`<button class="pe1" data-pe="${esc(p.id)}" aria-label="Засах: ${nm}">✎ Засах</button>`:''}</div>
- ${ed?`<input class="ei" data-e="name" data-id="${esc(p.id)}" value="${nm}" aria-label="Нэр"><input class="ei" data-e="price" data-id="${esc(p.id)}" data-i="${i}" type="number" inputmode="numeric" min="0" placeholder="${p.ch&&p.v.length>1?'Үнэ (бүх өнгөнд, ₮)':'Үнэ (₮)'}" value="${pp(p,i)??''}" aria-label="Үнэ">${p.ch?'':`<select class="ei" data-e="cat" data-id="${esc(p.id)}" aria-label="Ангилал">${BASECATS.map(c=>`<option ${c===p.cat?'selected':''}>${c}</option>`).join('')}</select>`}`:`<h3>${nm}</h3><div class="pr">${money(pp(p,i))}</div>`}
- <small>${esc(p.ch?v.id:p.id)}${v.color?' · '+esc(v.color):''}${p.v.length>1?' ('+p.v.length+' өнгө)':''}</small><div class="sw">${p.v.length>1?p.v.map((x,j)=>`<button class="${j===i?'on':''}" data-p="${esc(p.id)}" data-i="${j}" title="${esc(x.color||'')}" aria-label="${esc(x.color||('Хувилбар '+(j+1)))}" style="${esc(sws(x))}"></button>`).join(''):''}</div>
- ${ed&&v.color!==''?`<input class="ei" data-e="col" data-id="${esc(p.id)}" data-i="${i}" value="${esc(v.color)}" aria-label="Өнгөний нэр">`:''}
- <button class="pri" data-a="${esc(p.id)}">Сагсанд нэмэх</button></article>`}
+ return `<article class="pc" data-pid="${esc(p.id)}"><div class="im${p.ch?' ch':''}"><img loading="lazy" src="${esc(v.src)}" alt="${nm} ${esc(v.color||'')}"><button class="hf" data-f="${esc(p.id)}" aria-label="Дуртай">${favs.includes(p.id)?'♥':'♡'}</button>${SRV?`<button class="pe1" data-pe="${esc(p.id)}" aria-label="Засах: ${nm}" title="Засах">✎</button>`:''}${ed?'':`<button class="qa" data-a="${esc(p.id)}" aria-label="Сагсанд нэмэх: ${nm}">+</button>`}</div>
+ <div class="pb">${ed?`<input class="ei" data-e="name" data-id="${esc(p.id)}" value="${nm}" aria-label="Нэр"><input class="ei" data-e="price" data-id="${esc(p.id)}" data-i="${i}" type="number" inputmode="numeric" min="0" placeholder="${p.ch&&p.v.length>1?'Үнэ (бүх өнгөнд, ₮)':'Үнэ (₮)'}" value="${pp(p,i)??''}" aria-label="Үнэ">${p.ch?'':`<select class="ei" data-e="cat" data-id="${esc(p.id)}" aria-label="Ангилал">${BASECATS.map(c=>`<option ${c===p.cat?'selected':''}>${c}</option>`).join('')}</select>`}${v.color!==''?`<input class="ei" data-e="col" data-id="${esc(p.id)}" data-i="${i}" value="${esc(v.color)}" aria-label="Өнгөний нэр">`:''}<div class="sw">${p.v.length>1?p.v.map((x,j)=>`<button class="${j===i?'on':''}" data-p="${esc(p.id)}" data-i="${j}" aria-label="${esc(x.color||('Хувилбар '+(j+1)))}" style="${esc(sws(x))}"></button>`).join(''):''}</div>`
+  :`<h3>${nm}</h3><div class="pr">${money(pp(p,i))}</div>`}<div class="pmeta">${pdots(p,i)}<small class="pcode">${esc(p.ch?v.id:p.id)}</small></div></div></article>`}
 function shop(){
  if(!$('psq')){$('pcats').insertAdjacentHTML('beforebegin','<input type="search" id="psq" class="psq" placeholder="Бараа хайх: нэр эсвэл код (PR006, KC001…)" aria-label="Бараа хайх">');$('psq').addEventListener('input',e=>{psq=e.target.value;pshow=48;shop()})}
- if(SRV){if(!$('padm'))$('pcount').insertAdjacentHTML('beforebegin','<div class="padm" id="padm"></div>');$('edb').hidden=$('exb').hidden=true;
+ if(SRV){if(!$('padm'))$('shop').firstElementChild.insertAdjacentHTML('afterend','<div class="padm" id="padm"></div>');$('edb').hidden=$('exb').hidden=true;
   const nd=ALLX().filter(p=>DEL.has(p.id)).length;
   $('padm').innerHTML=`<button class="pri" data-pa="new">＋ Бараа нэмэх</button><button data-pa="bulk">Олон зурагнаас нэмэх</button>${nd?`<button data-pa="del">Устгасан бараа (${nd})</button>`:''}`}
  const ps=ALLP().map(eff);const cats=['all',...DEPTS,'fav'];
@@ -669,9 +864,10 @@ function shop(){
  $('pg').innerHTML=sh.length?sh.map(pcard).join('')+(l.length>sh.length?`<div class="pmore"><button data-pmore="1">Цааш үзэх (${l.length-sh.length})</button></div>`:'')
   :`<small>${q?'Олдсонгүй. Нэр эсвэл кодоо шалгана уу.':DEPTS.includes(pcat)?'Энэ хэсгийн бараа удахгүй нэмэгдэнэ.':'Олдсонгүй'}</small>`}
 $('pg').addEventListener('click',e=>{const t=e.target;
+ if(!ed&&!t.closest('button,input,select,a')){const a=t.closest('article.pc');if(a){psheet(a.dataset.pid);return}}
  const sw=t.closest('.sw button');if(sw){const id=sw.dataset.p,p=ALLP().find(x=>x.id===id);pv[id]=+sw.dataset.i;const a=sw.closest('article');if(a&&p)a.outerHTML=pcard(eff(p));return}
  const hf=t.closest('.hf');if(hf){const i=hf.dataset.f;favs=favs.includes(i)?favs.filter(x=>x!==i):[...favs,i];ls.s('pf',favs);$('fc').textContent=favs.length;if(pcat==='fav')shop();else hf.textContent=favs.includes(i)?'♥':'♡';return}
- const ad=t.closest('[data-a]');if(ad){const id=ad.dataset.a;cart.push({p:id,v:pv[id]||0});ls.s('pc',cart);$('cc').textContent=cartN();ad.textContent='Нэмэгдлээ ✓';setTimeout(()=>ad.textContent='Сагсанд нэмэх',900);return}
+ const ad=t.closest('[data-a]');if(ad){const id=ad.dataset.a;cart.push({p:id,v:pv[id]||0});ls.s('pc',cart);$('cc').textContent=cartN();ad.classList.add('ok');ad.textContent='✓';setTimeout(()=>{ad.classList.remove('ok');ad.textContent='+'},900);ctoast(id);return}
  const pe1=t.closest('[data-pe]');if(pe1){peOpen(pe1.dataset.pe);return}
  if(t.closest('[data-pmore]')){pshow+=48;shop()}});
 $('pg').addEventListener('change',e=>{const t=e.target;if(!t.classList||!t.classList.contains('ei')||!t.dataset.e)return;
@@ -691,13 +887,6 @@ function pinfo(c){const p=AP().find(x=>x.id===c.p);if(!p)return null;const e=eff
  return{ch:!!p.ch,name:e.name,color:v.color||'',id:p.ch?v.id:p.id,src:v.src,cat:e.cat,price:+q||0,has:q!=null&&q!==''&&+q>0,cm:p.ch?C(v.id).cm:0,ar:p.ch?C(v.id).ar:1}}
 const lineP=c=>c.box?gpr(c.box):c.p?((x=>x?x.price:0)(pinfo(c))):dp(c);
 const cartTot=()=>cart.reduce((s,c)=>s+lineP(c),0);
-function cartHTML(){if(!cart.length)return '<h2>Сагс</h2><p>Сагс хоосон</p><div class="row"><button data-go="gift">Бэлэг бэлдэх →</button></div>';
- const rows=cart.map((c,i)=>{let t,pv;
-  if(c.box){t='Бэлгийн хайрцаг '+esc(c.box)+(gbInfo(c.box).s?' ('+esc(gbInfo(c.box).s)+')':'');pv=gpr(c.box)}
-  else if(c.p){const x=pinfo(c);if(!x)return '';t=esc(x.name)+(x.color?' · '+esc(x.color):'')+' ('+x.id+')';pv=x.price}
-  else{const b=D.B.find(b=>b.id===c.bag);t='Оосор: '+c.sel.map(id=>GN[id]?esc(GN[id].name)+' ('+id+')':id).join(', ')+(b?' ('+esc(b.name)+' цүнхэн дээр харсан)':'');pv=dp(c)}
-  return `<p>${i+1}. ${t} · ${pv?fm(pv):'үнэ оруулаагүй'} <button data-r="${i}">Хасах</button></p>`}).join('');
- return '<h2>Сагс</h2>'+rows+'<p><b>Нийт дүн: '+fm(cartTot())+'</b></p><div class="row"><button data-go="gift">Бэлэг бэлдэх →</button><button class="pri" data-pay="1">Төлбөр төлөх →</button></div>'}
 $('cartb').onclick=()=>M(cartHTML());
 $('mbody').onclick=e=>{const r=e.target.dataset.r;if(r!==undefined){cart.splice(+r,1);ls.s('pc',cart);render();if(!$('giftv').hidden)showGift(false);$('cartb').click()}};
 $('favs').onclick=()=>{if(!$('shop').hidden){pcat='fav';shop();return}if($('look').hidden)go('look');ccat='fav';grid()};
@@ -936,7 +1125,7 @@ function ordModal0(){
  <p id="omsg" role="status"></p><div id="oqR" class="od" aria-live="polite"></div></div>
  <div class="ol"><input type="search" id="osq" placeholder="Хайх: код, утас, нэр, бараа" value="${esc(oqSearch)}" aria-label="Захиалга хайх">
  <p id="osum"></p><div class="od" id="odl"></div>
- <div class="row"><button id="oex">Хүснэгт болгон хуулах</button>${SRV?'<button id="plogout">Гарах</button>':''}</div></div></div>`);
+ <div class="row"><button id="oex">Хүснэгт болгон хуулах</button>${SRV?'<button id="osheet">📊 Google Sheets</button><button id="plogout">Гарах</button>':''}</div></div></div>`);
  renderOq();ordList()}
 function oflash(t,bad){const m=$('omsg');if(m){m.textContent=t||'';m.classList.toggle('bad',!!bad)}}
 function renderOq(){const el=$('oqR');if(!el)return;
@@ -1308,6 +1497,154 @@ $('mbody').addEventListener('input',e=>{if(!PT)return;const t=e.target;
  if(t.id==='ptz'&&PT.S){const a=Math.log(ptMin()),b=Math.log(5);PT.z=Math.exp(a+(b-a)*(+t.value)/1000);ptDraw()}
  else if(t.id==='ptb')PT.brush=+t.value;else if(t.id==='ptg'){PT.g=+t.value;ptDraw()}});
 $('mbody').addEventListener('change',e=>{if(PT&&e.target.id==='pta'){PT.auto=e.target.checked;ptDraw()}});
+
+/* ===== stage 5: доод цэс, барааны дэлгэрэнгүй, шинэ сагс, туслах (AI), Google Sheets ===== */
+const IC={
+ home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+ shop:'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
+ look:'<path d="M11 3.5l1.7 4.4 4.4 1.7-4.4 1.7L11 15.7l-1.7-4.4-4.4-1.7 4.4-1.7z"/><path d="M18 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+ gift:'<rect x="3.5" y="8.5" width="17" height="4.5" rx="1"/><path d="M5.5 13v7.5h13V13M12 8.5v12"/><path d="M12 8.5C9.5 8.5 7 7.6 7 5.8 7 4 10 4 12 8.5c2-4.5 5-4.5 5-2.7 0 1.8-2.5 2.7-5 2.7z"/>',
+ cart:'<path d="M5 8.5h14l-1.2 11.6a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/>',
+ chat:'<path d="M4.5 5.5h15v10.5H10l-5.5 4z"/><path d="M8.5 10.8h.01M12 10.8h.01M15.5 10.8h.01" stroke-width="2.6"/>'};
+const svg=(k,c)=>`<svg class="${c||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
+const cartCount=()=>cart.reduce((s,c)=>s+(c.box?1:c.p?1:(c.sel||[]).length),0);
+
+/* ── доод цэс ── */
+(()=>{const tb=document.createElement('nav');tb.className='tbar';tb.id='tbar';tb.setAttribute('aria-label','Цэс');
+ tb.innerHTML=[['home','Нүүр'],['shop','Бараа'],['look','Look'],['gift','Бэлэг'],['cart','Сагс']].map(([k,l])=>`<button data-tab="${k}"${k==='home'?' class="on" aria-current="page"':''}>${svg(k)}<span>${l}</span>${k==='cart'?'<b id="tbc" hidden>0</b>':''}</button>`).join('');
+ document.body.appendChild(tb);
+ tb.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;const k=b.dataset.tab;if(k==='cart'){openCart();return}$('modal').classList.remove('o');go(k)})})();
+function tabSync(v){document.querySelectorAll('#tbar [data-tab]').forEach(b=>{const on=b.dataset.tab===v;b.classList.toggle('on',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')})}
+function tabBadge(){const n=cartCount(),b=$('tbc');if(!b)return;const was=b.textContent;b.textContent=n;b.hidden=!n;if(n&&was!==String(n)){b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')}}
+const curView=()=>!$('home').hidden?'home':!$('shop').hidden?'shop':!$('look').hidden?'look':'gift';
+{const g0=go;go=function(v){g0(v);tabSync(curView())}}
+{const b0=bar;bar=function(){b0();tabBadge()}}
+tabBadge();
+function openCart(){const t=document.getElementById('ctoast');if(t)t.classList.remove('on');M(cartHTML())}
+
+/* ── сагсанд нэмэгдлээ ── */
+function ctoast(id){let el=document.getElementById('ctoast');
+ if(!el){el=document.createElement('div');el.id='ctoast';el.className='ctoast';el.setAttribute('role','status');document.body.appendChild(el);
+  el.addEventListener('click',e=>{if(e.target.closest('[data-tc]')){el.classList.remove('on');openCart()}})}
+ const p=id&&ALLX().find(x=>x.id===id),v=p&&(p.v[pv[id]||0]||p.v[0]);
+ el.innerHTML=`${v?`<img src="${esc(v.src)}" alt="">`:''}<span><b>Сагсанд нэмэгдлээ</b>${p?`<small>${esc(eff(p).name)}</small>`:''}</span><button data-tc="1">Сагс харах</button>`;
+ el.classList.add('on');clearTimeout(ctoast.t);ctoast.t=setTimeout(()=>el.classList.remove('on'),2600)}
+
+/* ── барааны дэлгэрэнгүй ── */
+let PS={id:'',i:0,q:1};
+function psheet(id,vi){const p0=ALLX().find(x=>x.id===id);if(!p0)return;const p=eff(p0);
+ const i=Math.max(0,Math.min(p.v.length-1,vi!=null?vi:(pv[id]||0)));PS={id,i,q:id===PS.id?PS.q:1};pv[id]=i;
+ const v=p.v[i]||p.v[0],price=pp(p,i),has=price!=null&&price!==''&&+price>0,nm=esc(p.name),del=DEL.has(id);
+ M(`<div class="ps" data-ps="${esc(id)}"><div class="psi${p.ch?' ch':''}"><img src="${esc(v.src)}" alt="${nm}"></div>
+ ${p.v.length>1?`<div class="pst" role="group" aria-label="Өнгө сонгох">${p.v.map((x,j)=>`<button class="${j===i?'on':''}" data-psv="${j}" aria-label="${esc(x.color||('Хувилбар '+(j+1)))}" aria-pressed="${j===i}"><img src="${esc(x.src)}" alt=""></button>`).join('')}</div>`:''}
+ <div class="psb"><h2>${nm}</h2><div class="psp">${has?fm(price):'Үнийг асуугаарай'}</div>
+ <p class="psm">${v.color?`Өнгө: <b>${esc(v.color)}</b> · `:''}${esc(p.ch?v.id:p.id)} · ${esc(p.cat)}${p.sub&&p.sub!==p.cat?' › '+esc(p.sub):''}</p>
+ ${del?'<p class="psm"><b>Энэ бараа одоогоор зарагдахгүй байна.</b></p>':`<div class="psq"><span>Тоо ширхэг</span><div class="qty"><button data-psq="-1" aria-label="Цөөлөх">−</button><output id="psqv">${PS.q}</output><button data-psq="1" aria-label="Нэмэх">+</button></div></div>
+ <div class="psa"><button class="pri big" data-psadd="1">Сагсанд нэмэх${has?' · <span id="pstot">'+fm(price*PS.q)+'</span>':''}</button><button class="psf${favs.includes(id)?' on':''}" data-psfav="1" aria-label="Дуртай" aria-pressed="${favs.includes(id)}">${favs.includes(id)?'♥':'♡'}</button></div>`}
+ ${p.ch&&!del?`<button class="lnk" data-pslook="${esc(v.id)}">✨ Цүнхэн дээр зүүж үзэх</button>`:''}</div></div>`)}
+$('mbody').addEventListener('click',e=>{const t=e.target,ps=t.closest('.ps');if(!ps)return;const id=ps.dataset.ps;
+ const sv=t.closest('[data-psv]');if(sv){const sc=$('mbody').parentElement.scrollTop;psheet(id,+sv.dataset.psv);$('mbody').parentElement.scrollTop=sc;return}
+ const sq=t.closest('[data-psq]');if(sq){PS.q=Math.max(1,Math.min(20,PS.q+(+sq.dataset.psq)));$('psqv').textContent=PS.q;
+  const p=ALLX().find(x=>x.id===id),pr=p&&pp(eff(p),PS.i),tt=$('pstot');if(tt&&pr)tt.textContent=fm(pr*PS.q);return}
+ if(t.closest('[data-psadd]')){for(let k=0;k<PS.q;k++)cart.push({p:id,v:PS.i});ls.s('pc',cart);$('cc').textContent=cartN();render();
+  if(!$('giftv').hidden)showGift(false);$('modal').classList.remove('o');ctoast(id);PS.q=1;return}
+ if(t.closest('[data-psfav]')){favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id];ls.s('pf',favs);$('fc').textContent=favs.length;
+  const b=t.closest('[data-psfav]'),on=favs.includes(id);b.classList.toggle('on',on);b.textContent=on?'♥':'♡';b.setAttribute('aria-pressed',on);return}
+ const lk=t.closest('[data-pslook]');if(lk){const vid=lk.dataset.pslook;$('modal').classList.remove('o');go('look');if(!st.sel.includes(vid))pickV(GK[vid],vid)}});
+
+/* ── сагс ── */
+function cartGroups(){const G=[],ix={};
+ cart.forEach((c,i)=>{if(c.p){const k=c.p+':'+(+c.v||0);if(k in ix)G[ix[k]].ix.push(i);else{ix[k]=G.length;G.push({t:'p',c,ix:[i]})}}
+  else G.push({t:c.box?'box':'look',c,ix:[i]})});return G}
+function cartHTML(){
+ if(!cart.length)return `<div class="cs"><h2>Сагс</h2><div class="cempty">${svg('cart','ce')}<p>Сагс хоосон байна.</p><small>Таалагдсан бараагаа «+» дараад нэмээрэй.</small><div class="row"><button class="pri" data-go="shop">Бараа үзэх</button></div></div></div>`;
+ const G=cartGroups();let n=0,miss=0;
+ const rows=G.map((g,gi)=>{
+  if(g.t==='p'){const x=pinfo(g.c);if(!x)return '';const q=g.ix.length;n+=q;if(!x.has)miss++;
+   return `<div class="cl"><button class="cth" data-cpv="${gi}" aria-label="${esc(x.name)} харах"><img src="${esc(x.src)}" alt=""></button><div class="cm"><b>${esc(x.name)}</b><small>${x.color?esc(x.color)+' · ':''}${esc(x.id)}</small><span class="cu">${x.has?fm(x.price)+(q>1?' × '+q:''):'Үнийг асуугаарай'}</span></div>
+   <div class="cq"><div class="qty sm"><button data-cdec="${gi}" aria-label="${q>1?'Цөөлөх':'Хасах'}">${q>1?'−':'🗑'}</button><output>${q}</output><button data-cinc="${gi}" aria-label="Нэмэх">+</button></div>${x.has?`<b class="ct">${fm(x.price*q)}</b>`:''}</div></div>`}
+  if(g.t==='box'){const id=g.c.box,b=D.G.find(x=>x.id===id),i=gbInfo(id),p=gpr(id);n++;if(!p)miss++;
+   return `<div class="cl"><span class="cth"><img src="${esc(b?b.src:'')}" alt=""></span><div class="cm"><b>Бэлгийн хайрцаг</b><small>${esc(id)}${i.s?' · '+esc(i.s):''}</small><span class="cu">${p?fm(p):'Үнийг асуугаарай'}</span></div>
+   <div class="cq"><button class="cx" data-crm="${gi}" aria-label="Хайрцгийг хасах">🗑</button>${p?`<b class="ct">${fm(p)}</b>`:''}</div></div>`}
+  const c=g.c,b=D.B.find(x=>x.id===c.bag),ids=(c.sel||[]).filter(id=>C(id)),v=dp(c);n+=ids.length;if(ids.some(id=>!cpr(id)))miss++;
+  return `<div class="cl look"><span class="cth"><img src="${esc(b?b.src:'')}" alt=""></span><div class="cm"><b>Оосор · ${ids.length} ширхэг</b><small>${b?esc(b.name)+' цүнхэн дээр зүүж харсан':''}</small>
+   <div class="cst">${ids.map(id=>`<span title="${esc(GN[id]?GN[id].name:id)}"><img src="${esc(C(id).src)}" alt=""><i>${esc(GN[id]?GN[id].name:id)}</i></span>`).join('')}</div></div>
+   <div class="cq"><button class="cx" data-crm="${gi}" aria-label="Оосрын багцыг хасах">🗑</button>${v?`<b class="ct">${fm(v)}</b>`:''}</div></div>`}).join('');
+ const t=cartTot();
+ return `<div class="cs"><h2>Сагс <small>${n} бараа</small></h2><div class="cls">${rows}</div>
+ <div class="csum"><div class="sr"><span>Барааны дүн</span><b>${fm(t)}</b></div><div class="sr mu"><span>Хүргэлт</span><span>дараагийн алхамд</span></div>${miss?`<p class="cmiss">${miss} барааны үнэ тодорхойгүй тул дүнд ороогүй. Үнийг нь бид тантай холбогдож хэлнэ.</p>`:''}</div>
+ <div class="cfoot"><button class="pri big" data-pay="1">Төлбөр төлөх · ${fm(t)}</button><button class="lnk" data-go="gift">🎁 Бэлэг болгож баглах</button></div></div>`}
+$('mbody').addEventListener('click',e=>{const t=e.target;if(!t.closest('.cs'))return;
+ const G=cartGroups(),f=(a)=>{const b=t.closest('['+a+']');return b?G[+b.getAttribute(a)]:null};let g;
+ const upd=()=>{ls.s('pc',cart);render();if(!$('giftv').hidden)showGift(false);const bx=$('mbody').parentElement,sc=bx.scrollTop;M(cartHTML());bx.scrollTop=sc};
+ if((g=f('data-cinc'))){cart.splice(g.ix[g.ix.length-1]+1,0,{...g.c});upd();return}
+ if((g=f('data-cdec'))){cart.splice(g.ix[g.ix.length-1],1);upd();return}
+ if((g=f('data-crm'))){[...g.ix].sort((a,b)=>b-a).forEach(i=>cart.splice(i,1));if(g.t==='look'&&sameSel(g.c.sel||[],st.sel))st.sel=[];upd();return}
+ if((g=f('data-cpv'))){psheet(g.c.p,+g.c.v||0)}});
+
+/* ── толгой хэсэг, бараа хуудасны дараалал ── */
+(()=>{const pc=$('pcount'),pg=$('pg');if(pc&&pg&&pc.nextElementSibling!==pg)pg.parentNode.insertBefore(pc,pg)})();
+tabSync(curView());
+
+/* ===== Туслах (AI): зөвхөн Cloudflare дээр ===== */
+let CH=[];try{CH=JSON.parse(sessionStorage.getItem('pchat')||'[]');if(!Array.isArray(CH))CH=[]}catch(e){CH=[]}
+const CHS=['Хүргэлт хэд вэ?','5,000₮-өөс доош бэлэг санал болго','Бэлгийн хайрцаг ямар байдаг вэ?','Яаж захиалах вэ?'];
+function chSave(){try{sessionStorage.setItem('pchat',JSON.stringify(CH.slice(-20)))}catch(e){}}
+function chFmt(s){let h=esc(s).replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>');
+ h=h.replace(/\[((?:PR|KC|N)\d{3,6}|GB\d{2})\]/g,(m,id)=>{const p=ALLX().find(x=>x.id===id),g=/^GB/.test(id)&&D.G.find(x=>x.id===id);
+  return p?`<button class="chp" data-chp="${id}">${esc(eff(p).name)}</button>`:g?`<button class="chp" data-chg="${id}">хайрцаг ${id}</button>`:esc(m)});
+ const LI=/^\s*([-•*]|\d+[.)])\s+/;
+ return h.split(/\n{2,}/).map(par=>{let o='',txt=[],li=[];const ft=()=>{if(txt.length){o+='<p>'+txt.join('<br>')+'</p>';txt=[]}},fl=()=>{if(li.length){o+='<ul>'+li.map(x=>'<li>'+x+'</li>').join('')+'</ul>';li=[]}};
+  par.split('\n').forEach(l=>{if(LI.test(l)){ft();li.push(l.replace(LI,''))}else if(l.trim()){fl();txt.push(l)}});ft();fl();return o}).join('')}
+function chCards(s){const ids=[...new Set((String(s).match(/\[((?:PR|KC|N)\d{3,6})\]/g)||[]).map(x=>x.slice(1,-1)))].slice(0,4);
+ const ps=ids.map(id=>ALLP().find(x=>x.id===id)).filter(Boolean);if(!ps.length)return '';
+ return `<div class="chc">${ps.map(p0=>{const p=eff(p0),v=p.v[0],pr=pp(p,0);return `<button data-chp="${esc(p.id)}"><img src="${esc(v.src)}" alt=""><span>${esc(p.name)}</span><b>${pr?fm(pr):''}</b></button>`}).join('')}</div>`}
+function chRender(busy){const L=$('chl');if(!L)return;
+ const hi='<div class="chm bot"><p>Сайн байна уу! 🌸 Би PETAL store-ийн туслах. Бараа, үнэ, хүргэлт, захиалгын талаар асуугаарай.</p></div>';
+ L.innerHTML=hi+CH.map(m=>m.role==='user'?`<div class="chm me"><p>${esc(m.content)}</p></div>`:`<div class="chm bot${m.err?' err':''}">${chFmt(m.content)}${m.err?'':chCards(m.content)}</div>`).join('')+(busy?'<div class="chm bot typing" aria-label="Бичиж байна"><i></i><i></i><i></i></div>':'');
+ $('chs').hidden=CH.length>0;L.scrollTop=L.scrollHeight}
+async function chSend(text){text=String(text||'').trim().slice(0,500);if(!text||chSend.busy)return;chSend.busy=true;
+ CH.push({role:'user',content:text});chSave();chRender(true);const inp=$('chi');if(inp){inp.value='';inp.style.height=''}
+ let reply='',err=false;
+ try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:CH.filter(m=>!m.err).slice(-10).map(m=>({role:m.role,content:m.content}))})});
+  let j={};try{j=await r.json()}catch(x){}
+  if(r.ok&&j.reply)reply=j.reply;else{err=true;reply=j.error==='too_many'?'Хэт олон асуулт илгээлээ. Түр хүлээгээд дахин асуугаарай.':j.error==='no_ai'?'Туслах одоогоор тохируулагдаагүй байна. Instagram-аар бичээрэй.':'Уучлаарай, яг одоо хариулж чадсангүй. Дахин асуух эсвэл Instagram-аар бичээрэй.'}}
+ catch(e){err=true;reply='Холбогдож чадсангүй. Интернэтээ шалгаад дахин асуугаарай.'}
+ CH.push({role:'assistant',content:reply,err});chSave();chSend.busy=false;chRender(false)}
+function chOpen(){const c=$('chat');if(!c)return;c.hidden=false;document.documentElement.classList.add('chopen');chRender(false);setTimeout(()=>{const i=$('chi');if(i&&matchMedia('(min-width:700px)').matches)i.focus()},60)}
+function chClose(){const c=$('chat');if(c)c.hidden=true;document.documentElement.classList.remove('chopen')}
+if(ONSRV){
+ const fab=document.createElement('button');fab.className='cfab';fab.id='cfab';fab.setAttribute('aria-label','Туслахаас асуух');fab.innerHTML=svg('chat')+'<span>Асуух</span>';document.body.appendChild(fab);
+ const ch=document.createElement('div');ch.className='chat';ch.id='chat';ch.hidden=true;ch.setAttribute('role','dialog');ch.setAttribute('aria-label','PETAL туслах');
+ ch.innerHTML=`<div class="chh"><span class="cha">🌸</span><div><b>PETAL туслах</b><small>AI · дэлгүүрийн талаар асуугаарай</small></div><button class="chx" aria-label="Хаах">✕</button></div>
+ <div class="chl" id="chl" aria-live="polite"></div><div class="chs" id="chs">${CHS.map(s=>`<button data-chs="${esc(s)}">${esc(s)}</button>`).join('')}</div>
+ <form class="chf" id="chf"><textarea id="chi" rows="1" maxlength="500" placeholder="Асуултаа бичнэ үү…" aria-label="Асуулт"></textarea><button class="pri" aria-label="Илгээх">➤</button></form>
+ <small class="chn">AI хариулт заримдаа алдаатай байж болно. Үнэ, захиалгаа сагсан дээрээ шалгаарай.</small>`;
+ document.body.appendChild(ch);
+ fab.addEventListener('click',chOpen);
+ ch.addEventListener('click',e=>{const t=e.target;if(t.closest('.chx')){chClose();return}
+  const s=t.closest('[data-chs]');if(s){chSend(s.dataset.chs);return}
+  const p=t.closest('[data-chp]');if(p){chClose();psheet(p.dataset.chp);return}
+  const g=t.closest('[data-chg]');if(g){chClose();st.gift=g.dataset.chg;ls.s('pgb',st.gift);go('gift')}});
+ $('chf').addEventListener('submit',e=>{e.preventDefault();chSend($('chi').value)});
+ $('chi').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();chSend(e.target.value)}});
+ $('chi').addEventListener('input',e=>{const t=e.target;t.style.height='';t.style.height=Math.min(120,t.scrollHeight)+'px'});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('chat').hidden)chClose()});
+}
+
+/* ===== Google Sheets (эзэн) ===== */
+async function sheetModal(){if(!PK()){loginModal('',sheetModal);return}
+ M('<div class="shm"><h2>Google Sheets</h2><p>Түр хүлээнэ үү…</p></div>');
+ try{const d=await srvCall('GET','sheet/token'),b=location.origin+'/api/sheet/';
+  const f1=`=IMPORTDATA("${b}orders.csv?k=${d.token}")`,f2=`=IMPORTDATA("${b}products.csv?k=${d.token}")`;
+  M(`<div class="shm"><h2>Google Sheets-д холбох</h2><small>Захиалга, барааны жагсаалт Google Sheets дээр өөрөө шинэчлэгдэж байна (ойролцоогоор цаг тутам, хуудсаа нээх бүрт).</small>
+  <ol><li><a href="https://sheets.new" target="_blank" rel="noopener">sheets.new</a> нээж шинэ хүснэгт үүсгэнэ.</li><li>Доорх томьёог хуулаад <b>A1</b> нүдэнд буулгана.</li><li>Бараанд зориулж хоёр дахь хуудас (Sheet2) нээгээд барааны томьёог мөн A1-д буулгана.</li></ol>
+  <label>Захиалгууд</label><div class="shf"><code>${esc(f1)}</code><button data-cp="${esc(f1)}">Хуулах</button></div>
+  <label>Бараа</label><div class="shf"><code>${esc(f2)}</code><button data-cp="${esc(f2)}">Хуулах</button></div>
+  <p class="shw">Энэ томьёонд нууц түлхүүр байгаа тул хүснэгтээ зөвхөн итгэдэг хүнтэйгээ хуваалцаарай. Нууц үгээ (ADMIN_KEY) солиход түлхүүр өөрчлөгдөнө.</p>
+  <div class="row"><button data-oback="1">← Захиалгууд</button></div></div>`)}
+ catch(e){if(e&&e.code==='unauthorized'){loginModal('Нууц үг буруу байна.',sheetModal);return}M('<div class="shm"><h2>Google Sheets</h2><p>'+esc(srvErr(e))+'</p></div>')}}
+$('mbody').addEventListener('click',e=>{if(e.target.id==='osheet')sheetModal()});
 /* ===== Нүүр: унжлага оосор савлана, лого дээр дарахад Нүүр рүү ===== */
 (()=>{const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
  if(!reduce)document.querySelectorAll('.h-hang').forEach(h=>{let busy=false;
